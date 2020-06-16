@@ -35,7 +35,7 @@ if __name__ == "__main__":
     stage1_generator_lr = 0.0002
     stage1_discriminator_lr = 0.0002
     stage1_lr_decay_step = 600
-    epochs = 1000
+    epochs = 5000
     condition_dim = 128
 
     embeddings_file_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
