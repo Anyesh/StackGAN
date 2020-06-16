@@ -196,5 +196,5 @@ if __name__ == "__main__":
                 save_rgb_img(img, "results/gen_{}_{}.png".format(epoch, i))
 
     # Save models
-    stage1_gen.save_weights("stage1_gen.h5")
-    stage1_dis.save_weights("stage1_dis.h5")
+    stage1_gen.save_weights("saved_model/stage1_gen.h5")
+    stage1_dis.save_weights("saved_model/stage1_dis.h5")
