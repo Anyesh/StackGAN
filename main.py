@@ -26,11 +26,11 @@ os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 
 
 if __name__ == "__main__":
-    data_dir = "./data/processed/birds/"
+    data_dir = "/spell/data/birds/"
     train_dir = data_dir + "/train"
     test_dir = data_dir + "/test"
     image_size = 64
-    batch_size = 8
+    batch_size = 300
     z_dim = 100
     stage1_generator_lr = 0.0002
     stage1_discriminator_lr = 0.0002
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     class_info_file_path_train = train_dir + "/class_info.pickle"
     class_info_file_path_test = test_dir + "/class_info.pickle"
 
-    cub_dataset_dir = "./data/processed/CUB_200_2011"
+    cub_dataset_dir = "/spell/data/CUB_200_2011"
 
     # Define optimizers
     dis_optimizer = Adam(lr=stage1_discriminator_lr, beta_1=0.5, beta_2=0.999)
