@@ -1,4 +1,3 @@
-
 import os
 import pickle
 import random
@@ -12,17 +11,17 @@ from tensorflow.keras.optimizers import Adam
 from data.make_dataset import load_dataset
 
 from models.model import (
-    build_ca_model, 
-    build_adversarial_model, 
-    build_embedding_compressor_model, 
-    build_stage1_discriminator, 
-    build_stage1_generator
+    build_ca_model,
+    build_adversarial_model,
+    build_embedding_compressor_model,
+    build_stage1_discriminator,
+    build_stage1_generator,
 )
 
 from losses.criterion import custom_generator_loss, KL_loss
 from utils import save_rgb_img, write_log
 
-os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
 
 
 if __name__ == "__main__":
@@ -30,7 +29,7 @@ if __name__ == "__main__":
     train_dir = data_dir + "/train"
     test_dir = data_dir + "/test"
     image_size = 64
-    batch_size = 900
+    batch_size = 128
     z_dim = 100
     stage1_generator_lr = 0.0002
     stage1_discriminator_lr = 0.0002
