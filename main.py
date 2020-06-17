@@ -30,7 +30,7 @@ if __name__ == "__main__":
     train_dir = data_dir + "/train"
     test_dir = data_dir + "/test"
     image_size = 64
-    batch_size = 1200
+    batch_size = 1000
     z_dim = 100
     stage1_generator_lr = 0.0002
     stage1_discriminator_lr = 0.0002
