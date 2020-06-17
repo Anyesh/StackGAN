@@ -30,12 +30,12 @@ if __name__ == "__main__":
     train_dir = data_dir + "/train"
     test_dir = data_dir + "/test"
     image_size = 64
-    batch_size = 900
+    batch_size = 1200
     z_dim = 100
     stage1_generator_lr = 0.0002
     stage1_discriminator_lr = 0.0002
     stage1_lr_decay_step = 600
-    epochs = 5000
+    epochs = 1000
     condition_dim = 128
 
     embeddings_file_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
