@@ -30,12 +30,12 @@ if __name__ == "__main__":
     train_dir = data_dir + "/train"
     test_dir = data_dir + "/test"
     image_size = 64
-    batch_size = 1000
+    batch_size = 900
     z_dim = 100
     stage1_generator_lr = 0.0002
     stage1_discriminator_lr = 0.0002
     stage1_lr_decay_step = 600
-    epochs = 1000
+    epochs = 500
     condition_dim = 128
 
     embeddings_file_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
@@ -161,10 +161,10 @@ if __name__ == "__main__":
                 dis_loss_real, 0.5 * np.add(dis_loss_wrong, dis_loss_fake)
             )
 
-            print("d_loss_real:{}".format(dis_loss_real))
-            print("d_loss_fake:{}".format(dis_loss_fake))
-            print("d_loss_wrong:{}".format(dis_loss_wrong))
-            print("d_loss:{}".format(d_loss))
+            # print("d_loss_real:{}".format(dis_loss_real))
+            # print("d_loss_fake:{}".format(dis_loss_fake))
+            # print("d_loss_wrong:{}".format(dis_loss_wrong))
+            # print("d_loss:{}".format(d_loss))
 
             """
             Train the generator network 
