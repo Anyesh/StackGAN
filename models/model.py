@@ -23,8 +23,7 @@ def generate_c(x):
     log_sigma = x[:, 128:]
     stddev = K.exp(log_sigma)
     epsilon = K.random_normal(shape=K.constant((mean.shape[1],), dtype="int32"))
-    c = stddev * epsilon + mean
-    return c
+    return stddev * epsilon + mean
 
 
 def build_ca_model():
@@ -35,8 +34,7 @@ def build_ca_model():
     input_layer = Input(shape=(1024,))
     x = Dense(256)(input_layer)
     x = LeakyReLU(alpha=0.2)(x)
-    model = Model(inputs=[input_layer], outputs=[x])
-    return model
+    return Model(inputs=[input_layer], outputs=[x])
 
 
 def build_embedding_compressor_model():
@@ -47,8 +45,7 @@ def build_embedding_compressor_model():
     x = Dense(128)(input_layer)
     x = ReLU()(x)
 
-    model = Model(inputs=[input_layer], outputs=[x])
-    return model
+    return Model(inputs=[input_layer], outputs=[x])
 
 
 def build_stage1_generator():
@@ -93,8 +90,7 @@ def build_stage1_generator():
     x = Conv2D(3, kernel_size=3, padding="same", strides=1, use_bias=False)(x)
     x = Activation(activation="tanh")(x)
 
-    stage1_gen = Model(inputs=[input_layer, input_layer2], outputs=[x, mean_logsigma])
-    return stage1_gen
+    return Model(inputs=[input_layer, input_layer2], outputs=[x, mean_logsigma])
 
 
 def build_stage1_discriminator():
@@ -134,8 +130,7 @@ def build_stage1_discriminator():
     x2 = Dense(1)(x2)
     x2 = Activation("sigmoid")(x2)
 
-    stage1_dis = Model(inputs=[input_layer, input_layer2], outputs=[x2])
-    return stage1_dis
+    return Model(inputs=[input_layer, input_layer2], outputs=[x2])
 
 
 def build_adversarial_model(gen_model, dis_model):
@@ -148,7 +143,7 @@ def build_adversarial_model(gen_model, dis_model):
     dis_model.trainable = False
     valid = dis_model([x, input_layer3])
 
-    model = Model(
-        inputs=[input_layer, input_layer2, input_layer3], outputs=[valid, mean_logsigma]
+    return Model(
+        inputs=[input_layer, input_layer2, input_layer3],
+        outputs=[valid, mean_logsigma],
     )
-    return model

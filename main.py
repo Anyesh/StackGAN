@@ -26,8 +26,8 @@ os.environ["TF_FORCE_GPU_ALLOW_GROWTH"] = "true"
 
 if __name__ == "__main__":
     data_dir = "/spell/data/birds/"
-    train_dir = data_dir + "/train"
-    test_dir = data_dir + "/test"
+    train_dir = f"{data_dir}/train"
+    test_dir = f"{data_dir}/test"
     image_size = 64
     batch_size = 128
     z_dim = 100
@@ -37,14 +37,14 @@ if __name__ == "__main__":
     epochs = 500
     condition_dim = 128
 
-    embeddings_file_path_train = train_dir + "/char-CNN-RNN-embeddings.pickle"
-    embeddings_file_path_test = test_dir + "/char-CNN-RNN-embeddings.pickle"
+    embeddings_file_path_train = f"{train_dir}/char-CNN-RNN-embeddings.pickle"
+    embeddings_file_path_test = f"{test_dir}/char-CNN-RNN-embeddings.pickle"
 
-    filenames_file_path_train = train_dir + "/filenames.pickle"
-    filenames_file_path_test = test_dir + "/filenames.pickle"
+    filenames_file_path_train = f"{train_dir}/filenames.pickle"
+    filenames_file_path_test = f"{test_dir}/filenames.pickle"
 
-    class_info_file_path_train = train_dir + "/class_info.pickle"
-    class_info_file_path_test = test_dir + "/class_info.pickle"
+    class_info_file_path_train = f"{train_dir}/class_info.pickle"
+    class_info_file_path_test = f"{test_dir}/class_info.pickle"
 
     cub_dataset_dir = "/spell/data/CUB_200_2011"
 
@@ -118,7 +118,7 @@ if __name__ == "__main__":
         # Load data and train model
         number_of_batches = int(X_train.shape[0] / batch_size)
         for index in range(number_of_batches):
-            print("Batch:{}".format(index + 1))
+            print(f"Batch:{index + 1}")
 
             """
             Train the discriminator network
@@ -172,7 +172,7 @@ if __name__ == "__main__":
                 [embedding_batch, z_noise, compressed_embedding],
                 [K.ones((batch_size, 1)) * 0.9, K.ones((batch_size, 256)) * 0.9],
             )
-            print("g_loss:{}".format(g_loss))
+            print(f"g_loss:{g_loss}")
 
             dis_losses.append(d_loss)
             gen_losses.append(g_loss)
@@ -187,12 +187,12 @@ if __name__ == "__main__":
         if epoch % 2 == 0:
             # z_noise2 = np.random.uniform(-1, 1, size=(batch_size, z_dim))
             z_noise2 = np.random.normal(0, 1, size=(batch_size, z_dim))
-            embedding_batch = embeddings_test[0:batch_size]
+            embedding_batch = embeddings_test[:batch_size]
             fake_images, _ = stage1_gen.predict_on_batch([embedding_batch, z_noise2])
 
             # Save images
             for i, img in enumerate(fake_images[:10]):
-                save_rgb_img(img, "results/gen_{}_{}.png".format(epoch, i))
+                save_rgb_img(img, f"results/gen_{epoch}_{i}.png")
 
     # Save models
     stage1_gen.save_weights("saved_model/stage1_gen.h5")

@@ -12,8 +12,7 @@ def load_class_ids(class_info_file_path):
     Load class ids from class_info.pickle file
     """
     with open(class_info_file_path, "rb") as f:
-        class_ids = pickle.load(f, encoding="latin1")
-        return class_ids
+        return pickle.load(f, encoding="latin1")
 
 
 def load_embeddings(embeddings_file_path):
@@ -57,7 +56,7 @@ def load_bounding_boxes(dataset_dir):
     filename_boundingbox_dict = {img_file[:-4]: [] for img_file in file_names[:2]}
 
     # Assign a bounding box to the corresponding image
-    for i in range(0, len(file_names)):
+    for i in range(len(file_names)):
         # Get the bounding box
         bounding_box = df_bounding_boxes.iloc[i][1:].tolist()
         key = file_names[i][:-4]
@@ -109,7 +108,7 @@ def load_dataset(
 
         try:
             # Load images
-            img_name = "{}/images/{}.jpg".format(cub_dataset_dir, filename)
+            img_name = f"{cub_dataset_dir}/images/{filename}.jpg"
             img = get_img(img_name, bounding_box, image_size)
 
             all_embeddings1 = all_embeddings[index, :, :]
